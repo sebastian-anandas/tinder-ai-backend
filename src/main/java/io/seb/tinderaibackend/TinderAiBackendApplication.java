@@ -11,7 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,6 +30,10 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        profileRepository.deleteAll();
+        conversationRepository.deleteAll();
+
         Profile profile = new Profile(
                 "1",
                 "Sebastian",
@@ -44,7 +47,8 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 
         );
         profileRepository.save(profile);
-        profile = new Profile(
+
+        Profile profile2 = new Profile(
                 "2",
                 "foo",
                 "bar",
@@ -57,7 +61,7 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 
         );
 
-        profileRepository.save(profile);
+        profileRepository.save(profile2);
         profileRepository.findAll().forEach(System.out::println);
 
         Conversation conversation = new Conversation(
